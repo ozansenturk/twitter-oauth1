@@ -131,24 +131,117 @@ def search_tweets(params):
 
     return auth_resp
 
-def list_users():
-
-    search_url = os.environ.get("URL_SEARCH")
-
+def get_real_client(real_oauth_token, real_oauth_token_secret):
     consumer = oauth.Consumer(
         current_app.config['APP_CONSUMER_KEY'], current_app.config['APP_CONSUMER_SECRET'])
 
-    # real_token = oauth.Token(user_credentials['real_oauth_token'], user_credentials['real_oauth_token_secret'])
-    real_token = oauth.Token('769594983280177153-9zO8kqfBARawPrjKVal1a6jp2WYw2Pc',
-                             'jtuf7uEvzBOjD1u708sZvcEXJVuNi0ChiFwguWoUh9f7b')
+    real_token = oauth.Token(real_oauth_token, real_oauth_token_secret)
 
     real_client = oauth.Client(consumer, real_token)
+
+    return real_client
+
+def list_followings():
+
+    # real_token = oauth.Token(user_credentials['real_oauth_token'],
+    # user_credentials['real_oauth_token_secret'])
+
+    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
+                             'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+
+    real_resp, real_content = real_client.request(
+        os.environ.get("API_LIST_FRIENDS") , "GET")
+
+    dict_str = real_content.decode("UTF-8")
+    json_content = json.loads(dict_str)
+
+    return json_content
+
+
+def list_followers():
+    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
+                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    #token
+    #token secret
+
+    real_resp, real_content = real_client.request(
+        os.environ.get("API_LIST_FOLLOWERS") , "GET")
+
+    dict_str = real_content.decode("UTF-8")
+    json_content = json.loads(dict_str)
+
+    return json_content
+
+
+def show_user(screen_name):
+    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
+                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
 
     #token
     #token secret
 
     real_resp, real_content = real_client.request(
-        os.environ.get("API_LIST_FRIENDS") , "GET")
+        "{}{}{}".format(os.environ.get("API_SHOW_USER"),"?screen_name=",screen_name) , "GET")
+
+    dict_str = real_content.decode("UTF-8")
+    json_content = json.loads(dict_str)
+
+    return json_content
+
+def list_retweets():
+    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
+                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+
+    #token
+    #token secret
+
+    real_resp, real_content = real_client.request(
+        os.environ.get("API_LIST_RETWEETS") , "GET")
+
+    dict_str = real_content.decode("UTF-8")
+    json_content = json.loads(dict_str)
+
+    return json_content
+
+
+def list_likes():
+    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
+                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+
+    #token
+    #token secret
+
+    real_resp, real_content = real_client.request(
+        os.environ.get("API_LIST_FAVORITES") , "GET")
+
+    dict_str = real_content.decode("UTF-8")
+    json_content = json.loads(dict_str)
+
+    return json_content
+
+def list_mentions():
+    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
+                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    #token
+    #token secret
+
+    real_resp, real_content = real_client.request(
+        os.environ.get("API_LIST_MENTIONS") , "GET")
+
+    dict_str = real_content.decode("UTF-8")
+    json_content = json.loads(dict_str)
+
+    return json_content
+
+
+def list_dms():
+    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
+                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    #token
+    #token secret
+
+    real_resp, real_content = real_client.request(
+        os.environ.get("API_LIST_DMS") , "GET")
 
     dict_str = real_content.decode("UTF-8")
     json_content = json.loads(dict_str)

@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "type": "message_create",
+      "id": "1278314954492465161",
+      "created_timestamp": "1593609009751",
+      "message_create": {
+        "target": {
+          "recipient_id": "769594983280177153"
+        },
+        "sender_id": "712614600894767104",
+        "message_data": {
+          "text": "Your Twopcharts statistics for the month of June 2020:\\n\\nNew followers: -4\\nNew following: -4\\nNew tweets: 19\\n\\nYou can see all details and graphs on your profile page on our website: https:\\/\\/t.co\\/R7YFEHeuFZ",
+          "entities": {
+            "hashtags": [],
+            "symbols": [],
+            "user_mentions": [],
+            "urls": [
+              {
+                "url": "https:\\/\\/t.co\\/R7YFEHeuFZ",
+                "expanded_url": "http:\\/\\/twopcharts.com\\/sentrworks\\/ms\\/dmsm",
+                "display_url": "twopcharts.com\\/sentrworks\\/ms\\/\\u2026",
+                "indices": [
+                  180,
+                  203
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
