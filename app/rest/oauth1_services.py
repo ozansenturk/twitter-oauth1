@@ -175,3 +175,18 @@ class Token(Resource):
         oauth1_ns.logger.debug("response {}".format(response))
 
         return response
+
+
+@oauth1_ns.route('/list_user_tweets/')
+class Token(Resource):
+
+    @oauth1_ns.doc('Show the tweets posted by user')
+    @oauth1_ns.marshal_with(tweet_response, code=http.client.OK)
+    def get(self):
+        '''favorites are now known as likes'''
+
+        response = services.list_user_tweets()
+
+        oauth1_ns.logger.debug("response {}".format(response))
+
+        return response

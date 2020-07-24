@@ -1,62 +1,59 @@
 # twitter oauth1 and oauth2 implementations
 
-This is a software as a service project based on the Twelve-Factor design
-https://12factor.net/
-
-1. Factory pattern (create_app) is applied to execute the app as one or 
-more stateless processes https://12factor.net/processes
-1. Configurations are strictly separated (each env. has seperate config) 
-https://12factor.net/config
-1. Dependencies are explicitly declared and 
-isolated (requirements.txt) https://12factor.net/dependencies
-1. Services exported via port 5000 https://12factor.net/port-binding
-1. Instant start and graceful shutdown of the app (uwsgi http.ini) 
-https://12factor.net/disposability
-1. Logging are treated as event streams and 
-proper formaters are applied https://12factor.net/logs
-1. Oauth2 is implemented to communicate with api.twitter.com.
-1. Flask-restx is used for restful services which support 
-swagger out of box
-1. Flask Blueprints are used for modular views
-1. Tests are written with pytest
-
 #Installation
 place an env. file into the root directory within the content below
 
 Directory structure
 ```python
 ├── README.md
-├── backend
+├── app
 │   ├── __init__.py
-│   └── services.py
+│   ├── backend
+│   │   ├── __init__.py
+│   │   └── services.py
+│   ├── rest
+│   │   ├── __init__.py
+│   │   ├── oauth1_services.py
+│   │   └── tweet_services.py
+│   ├── static
+│   │   ├── dm.json
+│   │   └── user.json
+│   ├── templates
+│   │   ├── base.html
+│   │   ├── callback-success.html
+│   │   ├── error.html
+│   │   ├── index.html
+│   │   └── start.html
+│   └── views
+│       ├── __init__.py
+│       └── auth.py
 ├── config.py
-├── data
-├── .env
 ├── http.ini
 ├── requirements.txt
-├── rest
-│   ├── __init__.py
-│   └── twitter_namespace.py
-├── static
-│   └── file.txt
-├── templates
-├── tests
-│   ├── __init__.py
-│   ├── conftest.py
-│   └── test_auth.py
 └── wsgi.py
+
 
 ```
 Envrionment variables
 ```.env
 API_KEY="*******"
 API_SECRET_KEY="*******"
-ACCESS_TOKEN="*******"
-ACCESS_SECRET="********"
+
 BASE_URL = "https://api.twitter.com/"
+
 URL_AUTH="oauth2/token"
 URL_SEARCH="1.1/search/tweets.json"
-CALL_BACK_URL=********
+
+CALL_BACK_URL='********/callback'
+
+API_LIST_FRIENDS="https://api.twitter.com/1.1/friends/list.json"
+API_LIST_FOLLOWERS="https://api.twitter.com/1.1/followers/list.json"
+API_SHOW_USER="https://api.twitter.com/1.1/users/show.json"
+API_LIST_RETWEETS="https://api.twitter.com/1.1/statuses/retweets_of_me.json"
+API_LIST_FAVORITES="https://api.twitter.com/1.1/favorites/list.json"
+API_LIST_MENTIONS="https://api.twitter.com/1.1/statuses/mentions_timeline.json"
+API_LIST_DMS="https://api.twitter.com/1.1/direct_messages/events/list.json"
+API_LIST_USER_TWEETS="https://api.twitter.com/1.1/statuses/user_timeline.json"
 ```
 
 Installation
@@ -68,16 +65,6 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 uwsgi http.ini
-
-```
-Test
-```python
-python3 $(which py.test)
-```
-
-```commandline
-tree -L 2 -I '__pycache__|venv|.git|.idea|.pytest*'
-```
 
 
 

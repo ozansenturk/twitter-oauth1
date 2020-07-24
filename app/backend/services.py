@@ -146,8 +146,8 @@ def list_followings():
     # real_token = oauth.Token(user_credentials['real_oauth_token'],
     # user_credentials['real_oauth_token_secret'])
 
-    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
-                             'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+    user_credentials['real_oauth_token_secret'])
 
     real_resp, real_content = real_client.request(
         os.environ.get("API_LIST_FRIENDS") , "GET")
@@ -159,8 +159,8 @@ def list_followings():
 
 
 def list_followers():
-    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
-                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+                                  user_credentials['real_oauth_token_secret'])
     #token
     #token secret
 
@@ -174,8 +174,8 @@ def list_followers():
 
 
 def show_user(screen_name):
-    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
-                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+                                  user_credentials['real_oauth_token_secret'])
 
     #token
     #token secret
@@ -189,8 +189,8 @@ def show_user(screen_name):
     return json_content
 
 def list_retweets():
-    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
-                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+                                  user_credentials['real_oauth_token_secret'])
 
     #token
     #token secret
@@ -205,8 +205,8 @@ def list_retweets():
 
 
 def list_likes():
-    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
-                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+                                  user_credentials['real_oauth_token_secret'])
 
     #token
     #token secret
@@ -220,8 +220,8 @@ def list_likes():
     return json_content
 
 def list_mentions():
-    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
-                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+                                  user_credentials['real_oauth_token_secret'])
     #token
     #token secret
 
@@ -235,13 +235,29 @@ def list_mentions():
 
 
 def list_dms():
-    real_client = get_real_client('769594983280177153-Xd4gYbwEBPatArYTEUTHnvzlqPnzre4',
-                                  'wSAJILTfo772FIH6JBYkRZo1ioI2yl9cOnFOtwuco9obN')
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+                                  user_credentials['real_oauth_token_secret'])
     #token
     #token secret
 
     real_resp, real_content = real_client.request(
         os.environ.get("API_LIST_DMS") , "GET")
+
+    dict_str = real_content.decode("UTF-8")
+    json_content = json.loads(dict_str)
+
+    return json_content
+
+
+def list_user_tweets():
+    real_client = get_real_client(user_credentials['real_oauth_token'],
+                                  user_credentials['real_oauth_token_secret'])
+
+    #token
+    #token secret
+
+    real_resp, real_content = real_client.request(
+        os.environ.get("API_LIST_USER_TWEETS") , "GET")
 
     dict_str = real_content.decode("UTF-8")
     json_content = json.loads(dict_str)
